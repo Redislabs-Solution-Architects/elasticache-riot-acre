@@ -1,18 +1,19 @@
 locals {
   acre = {
-    host = split("/", module.acre.redisgeek_config.cluster[0].id)[8]
-    region = module.acre.redisgeek_config.cluster[0].location
-    port = module.acre.redisgeek_config.database[0].port
-//    fqdn = "${acre.host}.${location}.redisenterprise.cache.azure.net"
+    host         = split("/", module.acre.redisgeek_config.cluster[0].id)[8]
+    region       = module.acre.redisgeek_config.cluster[0].location
+    port         = module.acre.redisgeek_config.database[0].port
+    keyVaultName = module.acre.secrets.keyVaultName
+    secretName   = module.acre.secrets.secretName
   }
   riot = {
-    user = module.riot.user
-    host = module.riot.host
+    user    = module.riot.user
+    host    = module.riot.host
     program = module.riot.program
   }
   ec = {
     address = aws_elasticache_cluster.source.cache_nodes[0].address
-    port = aws_elasticache_cluster.source.cache_nodes[0].port
+    port    = aws_elasticache_cluster.source.cache_nodes[0].port
   }
   sensitive = {
     private_key_pem = tls_private_key.example.private_key_pem
@@ -45,7 +46,7 @@ locals {
 //}
 
 output "sensitive" {
-  value = jsonencode(local.sensitive)
+  value     = jsonencode(local.sensitive)
   sensitive = true
 }
 
