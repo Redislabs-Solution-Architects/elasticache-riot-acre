@@ -17,21 +17,3 @@ variable "elasticache_node_type" {
   default     = "cache.t3.micro"
   description = "Elasticache node type. Default: cache.t3.micro"
 }
-
-variable "client_id" {
-  description = "Service Principal to use (az ad sp create-for-rbac ...)"
-  sensitive   = true
-}
-
-variable "client_secret" {
-  description = "Client Secret for Service Principal"
-  sensitive   = true
-}
-
-variable "subscription_id" {
-  type = string
-}
-
-variable "tenant_id" {
-  type = string
-}

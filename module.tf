@@ -1,13 +1,9 @@
 module "acre" {
-  source          = "github.com/redisgeek/acre-terraform-simple"
-  client_id       = var.client_id
-  client_secret   = var.client_secret
-  subscription_id = var.subscription_id
-  tenant_id       = var.tenant_id
+  source = "github.com/redisgeek/acre-terraform-simple"
 }
 
 module "riot" {
-  source            = "github.com/Redislabs-Solution-Architects/run_RIOT"
+  source            = "github.com/redisgeek/run_RIOT"
   region            = var.aws_region
   linux_ami         = var.linux_ami
   instance_type     = var.instance_type
@@ -16,8 +12,8 @@ module "riot" {
 }
 
 module "memtier" {
-  source            = "github.com/Redislabs-Solution-Architects/terraform_aws_memtier_benchmark"
-  region            = var.aws_region
+  source            = "github.com/redisgeek/terraform_aws_memtier_benchmark"
+  aws_region        = var.aws_region
   linux_ami         = var.linux_ami
   instance_type     = var.instance_type
   ssh_key_name      = aws_key_pair.generated_key.key_name

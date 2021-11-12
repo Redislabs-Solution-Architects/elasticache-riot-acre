@@ -1,10 +1,8 @@
 locals {
   acre = {
-    host         = split("/", module.acre.redisgeek_config.cluster[0].id)[8]
-    region       = module.acre.redisgeek_config.cluster[0].location
-    port         = module.acre.redisgeek_config.database[0].port
-    keyVaultName = module.acre.secrets.keyVaultName
-    secretName   = module.acre.secrets.secretName
+    host       = module.acre.redisgeek_config.hostname
+    port       = module.acre.redisgeek_config.port
+    access_key = module.acre.redisgeek_config.access_key
   }
   riot = {
     user    = module.riot.user
@@ -59,5 +57,6 @@ output "ec" {
 }
 
 output "acre" {
-  value = jsonencode(local.acre)
+  value     = jsonencode(local.acre)
+  sensitive = true
 }
