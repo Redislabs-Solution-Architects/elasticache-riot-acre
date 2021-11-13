@@ -5,7 +5,8 @@ variable "aws_region" {
 
 variable "linux_ami" {
   description = "Linux ami to use :: Should work with Redis Labs Sales Account"
-  default     = "ami-038f1ca1bd58a5790"
+  default     = "ami-04ad2567c9e3d7893"
+
 }
 
 variable "instance_type" {

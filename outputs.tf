@@ -18,15 +18,17 @@ locals {
   }
 }
 
-//output "run_riot" {
-//    value = "ssh -i ~/.ssh/${var.ssh_key_name}.pem ${module.riot.user}@${module.riot.host} '${module.riot.program}-h ${local.ec_node.address} -p ${local.ec_node.port}  replicate -h ${local.acre_fqdn} -p ${local.acre_port} --idle-timeout 10000 --live --tls --no-verify-peer -a PASSWORD'"
-//    description = "command to run riot - need to paste in value for PASSWORD from redis_insight-Password"
-//}
-//
-//output "run_memtier" {
-//    value = "ssh -i ~/.ssh/${var.ssh_key_name}.pem ${module.memtier.user}@${module.memtier.host} '${module.memtier.program} -s ${local.ec_node.address} -p ${local.ec_node.port}'"
-//    description = "command to run memtier against the elasticache instance"
-//}
+output "run_riot" {
+  value       = "ssh -i ./privateKey ${module.riot.user}@${module.riot.host} '${module.riot.program} -h ${aws_elasticache_cluster.source.cache_nodes[0].address} -p ${aws_elasticache_cluster.source.cache_nodes[0].port} replicate --type ds -h ${module.acre.redisgeek_config.hostname} -p ${module.acre.redisgeek_config.port} --idle-timeout 10000 --mode live --tls --no-verify -a ${module.acre.redisgeek_config.access_key}'"
+  description = "command to run riot - need to paste in value for PASSWORD from redis_insight-Password"
+  sensitive   = true
+}
+
+output "run_memtier" {
+  value       = "ssh -i ./privateKey ${module.memtier.user}@${module.memtier.host} '${module.memtier.program} -s ${aws_elasticache_cluster.source.cache_nodes[0].address} -p ${aws_elasticache_cluster.source.cache_nodes[0].port}'"
+  description = "command to run memtier against the elasticache instance"
+  sensitive   = true
+}
 
 //output "redis_insight-Host" {
 //  value       = local.acre_fqdn
