@@ -2,6 +2,16 @@ Migrating between [Elasticache] and [Azure Cache for Redis Enterprise (ACRE)] is
 
 This module provides a simple, end to end demonstration of the process.
 
+
+# Quick Start
+```
+terraform init -upgrade
+terraform plan
+teraform apply
+./run_memtier_benchmark.sh
+./run_riot.sh
+```
+
 # Architecture
 The system architecture is shown below:
 
