@@ -1,6 +1,8 @@
 #!/bin/bash
 rm -rf privateKey
 
+export IDLE_TIMEOUT=10000
+
 export EC_HOST=$(terraform output -raw ec | jq -r .address)
 export EC_PORT=$(terraform output -raw ec | jq -r .port)
 
@@ -16,5 +18,5 @@ echo "Executing RIOT via SSH"
 touch privateKey
 chmod 600 privateKey
 terraform output -raw sensitive | jq -r .private_key_pem >> privateKey
-ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i privateKey "$RIOT_USER"@"$RIOT_HOST" "$RIOT_BIN -h $EC_HOST -p $EC_PORT  replicate -h $ACRE_HOST -p $ACRE_PORT --idle-timeout 10000 --mode live --tls --no-verify -a $ACRE_PASS"
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i privateKey "$RIOT_USER"@"$RIOT_HOST" "$RIOT_BIN -h $EC_HOST -p $EC_PORT  replicate -h $ACRE_HOST -p $ACRE_PORT --idle-timeout $IDLE_TIMEOUT --mode live --tls -a $ACRE_PASS"
 rm -rf privateKey
