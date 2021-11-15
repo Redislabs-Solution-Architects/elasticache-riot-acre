@@ -9,6 +9,11 @@ locals {
     host    = module.riot.host
     program = module.riot.program
   }
+  memtier = {
+    user    = module.memtier.user
+    host    = module.memtier.host
+    program = module.memtier.program
+  }
   ec = {
     address = aws_elasticache_cluster.source.cache_nodes[0].address
     port    = aws_elasticache_cluster.source.cache_nodes[0].port
@@ -52,6 +57,10 @@ output "sensitive" {
 
 output "riot" {
   value = jsonencode(local.riot)
+}
+
+output "memtier" {
+  value = jsonencode(local.memtier)
 }
 
 output "ec" {
