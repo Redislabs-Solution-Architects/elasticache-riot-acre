@@ -103,7 +103,6 @@ terraform destroy
 
 
 # Issues
-- [Issue 14420] prevents us from automating retrieval of the ACRE DB password
 - Requires user to have already setup a default VPC and a subnet. 
 - Security Group requires ssh access by user, access from EC2 instances to Elasticache, and egress
 - Minimal permissions to run this template are not specified
@@ -116,4 +115,3 @@ terraform destroy
 [AWS provider]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 [Azure provider]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
 [RedisInsight]: https://redislabs.com/redis-enterprise/redis-insight
-[Issue 14420]: https://github.com/Azure/azure-sdk-for-go/issues/14420
