@@ -1,12 +1,12 @@
 #!/bin/bash
-rm -rf privateKey
+rm -rf ./privateKey
 
-export EC_HOST=$(terraform output -raw ec | jq -r .address)
-export EC_PORT=$(terraform output -raw ec | jq -r .port)
+export EC_HOST=$(terraform output -raw ec | jq -r '.address')
+export EC_PORT=$(terraform output -raw ec | jq -r '.port')
 
-export MEMTIER_USER=$(terraform output -raw memtier | jq -r .user)
-export MEMTIER_HOST=$(terraform output -raw memtier | jq -r .host)
-export MEMTIER_BIN=$(terraform output -raw memtier | jq -r .program)
+export MEMTIER_USER=$(terraform output -raw memtier | jq -r '.user')
+export MEMTIER_HOST=$(terraform output -raw memtier | jq -r '.host')
+export MEMTIER_BIN=$(terraform output -raw memtier | jq -r '.program')
 
 echo "Executing Memtier Benchmark via SSH - Random Keys - 50:1 - 60s"
 touch privateKey
